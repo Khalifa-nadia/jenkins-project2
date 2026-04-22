@@ -1,0 +1,16 @@
+- hosts: local
+  tasks:
+
+    - name: Pull Docker image
+      command: docker pull nadiakhalifa/flask-app
+
+    - name: Stop container
+      command: docker stop flask-app
+      ignore_errors: yes
+
+    - name: Remove container
+      command: docker rm flask-app
+      ignore_errors: yes
+
+    - name: Run container
+      command: docker run -d -p 5000:5000 --name flask-app nadiakhalifa/flask-app
