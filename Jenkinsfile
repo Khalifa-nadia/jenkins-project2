@@ -36,5 +36,12 @@ pipeline {
                 sh 'docker push $IMAGE_NAME'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'docker stop flask-app || true'
+                sh 'docker rm flask-app || true'
+                sh 'docker run -d -p 5000:5000 --name flask-app nadiakhalifa/flask-app'
+            }
+        }
     }
 }
